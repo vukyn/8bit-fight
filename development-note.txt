@@ -36,4 +36,6 @@ Features:
     - Add more fighter
     - Try again button
     - Add heavy attack
-    - Add speical move(dash, 2-jump)
+    - Add speical move(dash, double jump)
+    - Add special attack (double hit)
+    - Add range attack

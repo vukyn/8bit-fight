@@ -22,7 +22,9 @@ const key = {
 
 
 // Create 2 Fighters with initial states (P1 and P2)
-const player1 = CHAR_RYUMA;
+// const player1 = CHAR_RYUMA;
+// const player1 = CHAR_SNAPE;
+const player1 = CHAR_TARZAN;
 const player2 = CHAR_RONIN;
 
 // Create sprites with initial states

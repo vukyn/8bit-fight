@@ -17,9 +17,9 @@ function determineWinner({ player1, player2, timer }) {
     if (player1.remainingHealth === player2.remainingHealth) {
         document.querySelector('#result').innerHTML = 'Tie';
     } else if (player1.remainingHealth > player2.remainingHealth) {
-        document.querySelector('#result').innerHTML = 'Player 1 win';
+        document.querySelector('#result').innerHTML = player1.name + ' win';
     } else if (player1.remainingHealth < player2.remainingHealth) {
-        document.querySelector('#result').innerHTML = 'Player 2 win';
+        document.querySelector('#result').innerHTML = player2.name + ' win';
     }
 }
 
