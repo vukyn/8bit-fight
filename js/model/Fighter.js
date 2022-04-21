@@ -13,7 +13,8 @@ class Fighter extends Sprite {
         this.name = name;
         this.speed = speed;
         this.lastKey;
-        this.isAttacking;
+        this.isNormalAttacking;
+        this.isHeavyAttacking;
         this.attackBox = {
             position: {
                 x: this.position.x,
@@ -64,10 +65,17 @@ class Fighter extends Sprite {
         else this.speed.y += gravity;
     }
 
-    attack() {
-        this.switchSprite('attack1');
+    normalAttack() {
+        this.switchSprite('normalAttack');
         if (this.framesCurrent === 0) {
-            this.isAttacking = true;
+            this.isNormalAttacking = true;
+        }
+    }
+
+    heavyAttack() {
+        this.switchSprite('heavyAttack');
+        if (this.framesCurrent === 0) {
+            this.isHeavyAttacking = true;
         }
     }
 
@@ -79,9 +87,14 @@ class Fighter extends Sprite {
     }
 
     switchSprite(sprite) {
-        //Overriding all other animations with the attack animation
-        if (this.image === this.sprites.attack1.image &&
-            this.framesCurrent < this.sprites.attack1.framesMax - 1)
+        //Overriding all other animations with the normal attack animation
+        if (this.image === this.sprites.normalAttack.image &&
+            this.framesCurrent < this.sprites.normalAttack.framesMax - 1)
+            return;
+
+        //Overriding all other animations with the heavy attack animation
+        if (this.image === this.sprites.heavyAttack.image &&
+            this.framesCurrent < this.sprites.heavyAttack.framesMax - 1)
             return;
 
         //Overriding all other animations with the take hit animation
@@ -125,17 +138,17 @@ class Fighter extends Sprite {
                     this.framesCurrent = 0;
                 }
                 break;
-            case 'attack1':
-                if (this.image !== this.sprites.attack1.image) {
-                    this.image = this.sprites.attack1.image;
-                    this.framesMax = this.sprites.attack1.framesMax
+            case 'normalAttack':
+                if (this.image !== this.sprites.normalAttack.image) {
+                    this.image = this.sprites.normalAttack.image;
+                    this.framesMax = this.sprites.normalAttack.framesMax
                     this.framesCurrent = 0;
                 }
                 break;
-            case 'attack2':
-                if (this.image !== this.sprites.attack2.image) {
-                    this.image = this.sprites.attack2.image;
-                    this.framesMax = this.sprites.attack2.framesMax
+            case 'heavyAttack':
+                if (this.image !== this.sprites.heavyAttack.image) {
+                    this.image = this.sprites.heavyAttack.image;
+                    this.framesMax = this.sprites.heavyAttack.framesMax
                     this.framesCurrent = 0;
                 }
                 break;

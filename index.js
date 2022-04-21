@@ -91,31 +91,70 @@ function animate() {
     else if (player2.speed.y > 0)
         player2.switchSprite('fall')
 
+    // // Detect collisions and gets hit
+    // if (determineCollision({ rectangle1: player1, rectangle2: player2 }) &&
+    //     player1.framesCurrent === player1.sprites.normalAttack.framesAttackHit &&
+    //     player1.isNormalAttacking) {
+    //     player1.isNormalAttacking = false;
+    //     player2.takeHit(player1.normalDamage);
+    //     gsap.to('#player2-remaining-health', {
+    //         width: (player2.remainingHealth / player2.maxHealth) * 100 + '%'
+    //     });
+    // }
+    // if (determineCollision({ rectangle1: player2, rectangle2: player1 }) &&
+    //     player2.framesCurrent === player2.sprites.normalAttack.framesAttackHit &&
+    //     player2.isNormalAttacking) {
+    //     player2.isNormalAttacking = false;
+    //     player1.takeHit(player2.normalDamage);
+    //     gsap.to('#player1-remaining-health', {
+    //         width: (player1.remainingHealth / player1.maxHealth) * 100 + '%'
+    //     });
+    // }
+
+    // // Detect if misses
+    // if (player1.isNormalAttacking && player1.framesCurrent === player1.sprites.normalAttack.framesAttackHit)
+    //     player1.isNormalAttacking = false;
+    // if (player2.isNormalAttacking && player2.framesCurrent === player2.sprites.normalAttack.framesAttackHit)
+    //     player2.isNormalAttacking = false;
+
     // Detect collisions and gets hit
     if (determineCollision({ rectangle1: player1, rectangle2: player2 }) &&
-        player1.framesCurrent === player1.sprites.attack1.framesAttackHit &&
-        player1.isAttacking) {
-        player1.isAttacking = false;
-        player2.takeHit(player1.normalDamage);
+        player1.framesCurrent === player1.sprites.normalAttack.framesAttackHit &&
+        (player1.isNormalAttacking || player1.isHeavyAttacking)) {
+        if (player1.isNormalAttacking) player2.takeHit(player1.normalDamage);
+        else if (player1.isHeavyAttacking) player2.takeHit(player1.heavyDamage);
+        player1.isNormalAttacking = false;
+        player1.isHeavyAttacking = false;
         gsap.to('#player2-remaining-health', {
-            width: (player2.remainingHealth / player2.maxHealth) * 100 + '%'
+            width:
+                ((player2.remainingHealth / player2.maxHealth) * 100 < 0 ? 0 :
+                    (player2.remainingHealth / player2.maxHealth) * 100) + '%'
         });
     }
     if (determineCollision({ rectangle1: player2, rectangle2: player1 }) &&
-        player2.framesCurrent === player2.sprites.attack1.framesAttackHit &&
-        player2.isAttacking) {
-        player2.isAttacking = false;
-        player1.takeHit(player2.normalDamage);
+        player2.framesCurrent === player2.sprites.normalAttack.framesAttackHit &&
+        (player2.isNormalAttacking || player2.isHeavyAttacking)) {
+        if (player2.isNormalAttacking) player1.takeHit(player2.normalDamage);
+        else if (player2.isHeavyAttacking) player1.takeHit(player2.heavyDamage);
+        player2.isNormalAttacking = false;
+        player2.isHeavyAttacking = false;
         gsap.to('#player1-remaining-health', {
-            width: (player1.remainingHealth / player1.maxHealth) * 100 + '%'
+            width:
+                ((player1.remainingHealth / player1.maxHealth) * 100 < 0 ? 0 :
+                    (player1.remainingHealth / player1.maxHealth) * 100) + '%'
         });
     }
 
     // Detect if misses
-    if (player1.isAttacking && player1.framesCurrent === player1.sprites.attack1.framesAttackHit)
-        player1.isAttacking = false;
-    if (player2.isAttacking && player2.framesCurrent === player2.sprites.attack1.framesAttackHit)
-        player2.isAttacking = false;
+    if (player1.isNormalAttacking && player1.framesCurrent === player1.sprites.normalAttack.framesAttackHit)
+        player1.isNormalAttacking = false;
+    if (player2.isNormalAttacking && player2.framesCurrent === player2.sprites.normalAttack.framesAttackHit)
+        player2.isNormalAttacking = false;
+    if (player1.isHeavyAttacking && player1.framesCurrent === player1.sprites.heavyAttack.framesAttackHit)
+        player1.isHeavyAttacking = false;
+    if (player2.isHeavyAttacking && player2.framesCurrent === player2.sprites.heavyAttack.framesAttackHit)
+        player2.isHeavyAttacking = false;
+
 
     //End game on health change
     if (player1.remainingHealth <= 0 || player2.remainingHealth <= 0) {
@@ -138,9 +177,13 @@ window.addEventListener('keydown', (event) => {
                 if (player1.position.y + player1.dimension.height >= groundStage_Y)
                     player1.speed.y = -15;
                 break;
-            case 's':
-                if (!player1.isAttacking)
-                    player1.attack();
+            case 'g':
+                if (!player1.isNormalAttacking)
+                    player1.normalAttack();
+                break;
+            case 'h':
+                if (!player1.isHeavyAttacking)
+                    player1.heavyAttack();
                 break;
             case 'ArrowRight':
                 key.ArrowRight.pressed = true;
@@ -154,9 +197,13 @@ window.addEventListener('keydown', (event) => {
                 if (player2.position.y + player2.dimension.height >= canvas.height - 97)
                     player2.speed.y = -15;
                 break;
-            case 'ArrowDown':
-                if (!player2.isAttacking)
-                    player2.attack();
+            case '4':
+                if (!player2.isNormalAttacking)
+                    player2.normalAttack();
+                break;
+            case '5':
+                if (!player2.isHeavyAttacking)
+                    player2.heavyAttack();
                 break;
             default:
                 break;

@@ -1,3 +1,14 @@
+HOW TO PLAY:
+- Control:
+    Player 1:
+        - move (A,W,D)
+        - normal attack (G)
+        - heavy attack (H)
+    Player 2:
+        - move (arrow Left, arrow Right, arrow Up)
+        - normal attack (4)
+        - heavy attack (5)
+
 KNOWNS ISSUES:
 
 - Scenario 1 (Solved):

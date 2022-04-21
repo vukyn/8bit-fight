@@ -31,12 +31,12 @@ const CHAR_RYUMA = new Fighter({
             imgsrc: './img/fighter/ryuma/Fall.png',
             framesMax: 2
         },
-        attack1: {
+        normalAttack: {
             imgsrc: './img/fighter/ryuma/Attack1.png',
             framesMax: 6,
             framesAttackHit: 4
         },
-        attack2: {
+        heavyAttack: {
             imgsrc: './img/fighter/ryuma/Attack2.png',
             framesMax: 6,
             framesAttackHit: 4
@@ -85,12 +85,12 @@ const CHAR_RONIN = new Fighter({
             imgsrc: './img/fighter/ronin/Fall.png',
             framesMax: 2
         },
-        attack1: {
+        normalAttack: {
             imgsrc: './img/fighter/ronin/Attack1.png',
             framesMax: 4,
             framesAttackHit: 2
         },
-        attack2: {
+        heavyAttack: {
             imgsrc: './img/fighter/ronin/Attack2.png',
             framesMax: 4,
             framesAttackHit: 2
