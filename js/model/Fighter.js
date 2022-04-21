@@ -1,16 +1,17 @@
 // A class represent for the state and behavior of a fighter
 class Fighter extends Sprite {
     constructor({
-        position, velocity, sprites, imgsrc, scale = 1,
+        position, speed, name, sprites, imgsrc, scale = 1,
         maxHealth = 100, remainingHealth = 100,
-        normalDamage = 10, specialDamage = 30,
+        normalDamage = 10, heavyDamage = 30, defense = 0,
         framesMax = 1,
         framesHold = 7,
         offset = { x: 0, y: 0 },
         dimension = { width: 50, height: 150 },
         attackBox = { offset: { x: 0, y: 0 }, width: 0, height: 0 } }) {
         super({ position, imgsrc, scale, framesMax, framesHold, offset, dimension });
-        this.velocity = velocity;
+        this.name = name;
+        this.speed = speed;
         this.lastKey;
         this.isAttacking;
         this.attackBox = {
@@ -25,7 +26,8 @@ class Fighter extends Sprite {
         this.maxHealth = maxHealth;
         this.remainingHealth = remainingHealth;
         this.normalDamage = normalDamage;
-        this.specialDamage = specialDamage;
+        this.heavyDamage = heavyDamage;
+        this.defense = defense
         this.framesCurrent = 0;
         this.framesElapsed = 0;
         this.sprites = sprites;
@@ -42,22 +44,24 @@ class Fighter extends Sprite {
         if (!this.isDead) this.animateFrames();
 
         // Draw fighter
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
+        this.position.x += this.speed.x;
+        this.position.y += this.speed.y;
+        //c.fillStyle = 'black';
         //c.fillRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height);
 
         // Draw attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
+        //c.fillStyle = 'black';
         //c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
 
         // Gravity control
         const gravity = 0.7;
-        if (this.position.y + this.dimension.height + this.velocity.y >= groundStage_Y) {
-            this.velocity.y = 0;
+        if (this.position.y + this.dimension.height + this.speed.y >= groundStage_Y) {
+            this.speed.y = 0;
             this.position.y = groundStage_Y - this.dimension.height;
         }
-        else this.velocity.y += gravity;
+        else this.speed.y += gravity;
     }
 
     attack() {
@@ -69,8 +73,6 @@ class Fighter extends Sprite {
 
     takeHit(damage) {
         this.remainingHealth -= damage;
-        console.log('dmg: ' + damage);
-        console.log(this.remainingHealth);
         if (this.remainingHealth <= 0)
             this.switchSprite('death');
         else this.switchSprite('takehit');

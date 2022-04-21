@@ -1,6 +1,6 @@
 KNOWNS ISSUES:
 
-- Scenario 1:
+- Scenario 1 (Solved):
     - 1 attack can cause double damage
     - 5 attack() called with 4 attacking animation only 
 - Reason:
@@ -8,8 +8,21 @@ KNOWNS ISSUES:
 - Solution:
     - In fighter.attack(), set isAttacking to true only when animation is reset (framesCurrent = 0)
 
+- Scenario 2:
+    - Sometimes health reduced to 0 but no death animation occurs.
+- Reason:
+- Solution:
+
+- Scenario 2:
+    - Rapidly presses attack button but the attack animation does not respond.
+    - When 2 players press attack at the same time usually happens
+- Reason:
+- Solution:
+
 TODO:
 
 Features:
     - Add more fighter
     - Try again button
+    - Add heavy attack
+    - Add speical move(dash, 2-jump)

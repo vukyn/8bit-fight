@@ -9,16 +9,16 @@ function determineCollision({ rectangle1, rectangle2 }) {
 
 // Winner logic
 var isOver = false;
-function determineWinner({ player, enemy, timer }) {
+function determineWinner({ player1, player2, timer }) {
     clearTimeout(timer);
     isOver = true;
     document.querySelector('#result').style.display = 'flex';
     // document.querySelector('#retry').style.display = 'inline';
-    if (player.remainingHealth === enemy.remainingHealth) {
+    if (player1.remainingHealth === player2.remainingHealth) {
         document.querySelector('#result').innerHTML = 'Tie';
-    } else if (player.remainingHealth > enemy.remainingHealth) {
+    } else if (player1.remainingHealth > player2.remainingHealth) {
         document.querySelector('#result').innerHTML = 'Player 1 win';
-    } else if (player.remainingHealth < enemy.remainingHealth) {
+    } else if (player1.remainingHealth < player2.remainingHealth) {
         document.querySelector('#result').innerHTML = 'Player 2 win';
     }
 }

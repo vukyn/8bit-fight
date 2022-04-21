@@ -16,7 +16,7 @@
     padding: 20px;
 }
 
-#player-healthbar {
+#player1-healthbar {
     border-top: 2px solid white;
     border-left: 2px solid white;
     border-bottom: 2px solid white;
@@ -26,7 +26,7 @@
     justify-content: flex-end;
 }
 
-#enemy-healthbar {
+#player2-healthbar {
     border-top: 2px solid white;
     border-right: 2px solid white;
     border-bottom: 2px solid white;
@@ -34,7 +34,7 @@
     width: 100%;
 }
 
-#player-remaining-health {
+#player1-remaining-health {
     position: absolute;
     background: #818cf8;
     top: 0;
@@ -43,7 +43,7 @@
     width: 100%;
 }
 
-#enemy-remaining-health {
+#player2-remaining-health {
     position: absolute;
     background: #818cf8;
     top: 0;

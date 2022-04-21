@@ -22,110 +22,10 @@ const key = {
 
 
 // Create 2 Fighters with initial states (P1 and P2)
-const player = new Fighter({
-    position: { x: 100, y: 150 },
-    velocity: { x: 0, y: 0 },
-    offset: { x: 218, y: 194 },
-    dimension: { width: 60, height: 110 },
-    attackBox: { offset: { x: 115, y: 0 }, width: 138, height: 65 },
-    imgsrc: './img/fighter/mack/Idle.png',
-    scale: 2.5,
-    framesMax: 8,
-    framesHold: 5,
-    maxHealth: 120,
-    remainingHealth: 120,
-    normalDamage: 15,
-    specialDamage: 30,
-    sprites: {
-        idle: {
-            imgsrc: './img/fighter/mack/Idle.png',
-            framesMax: 8
-        },
-        run: {
-            imgsrc: './img/fighter/mack/Run.png',
-            framesMax: 8
-        },
-        jump: {
-            imgsrc: './img/fighter/mack/Jump.png',
-            framesMax: 2
-        },
-        fall: {
-            imgsrc: './img/fighter/mack/Fall.png',
-            framesMax: 2
-        },
-        attack1: {
-            imgsrc: './img/fighter/mack/Attack1.png',
-            framesMax: 6,
-            framesAttackHit: 4
-        },
-        attack2: {
-            imgsrc: './img/fighter/mack/Attack2.png',
-            framesMax: 6,
-            framesAttackHit: 4
-        },
-        takehit: {
-            imgsrc: './img/fighter/mack/Take Hit.png',
-            framesMax: 4
-        },
-        death: {
-            imgsrc: './img/fighter/mack/Death.png',
-            framesMax: 6
-        }
-    }
-});
-const enemy = new Fighter({
-    position: { x: 900, y: 150 },
-    velocity: { x: 0, y: 0 },
-    offset: { x: 215, y: 198 },
-    dimension: { width: 52, height: 121 },
-    attackBox: { offset: { x: -174, y: 10 }, width: 130, height: 60 },
-    imgsrc: './img/fighter/kenji/Idle.png',
-    scale: 2.5,
-    framesMax: 4,
-    framesHold: 7,
-    maxHealth: 90,
-    remainingHealth: 90,
-    normalDamage: 10,
-    specialDamage: 25,
-    sprites: {
-        idle: {
-            imgsrc: './img/fighter/kenji/Idle.png',
-            framesMax: 4
-        },
-        run: {
-            imgsrc: './img/fighter/kenji/Run.png',
-            framesMax: 8
-        },
-        jump: {
-            imgsrc: './img/fighter/kenji/Jump.png',
-            framesMax: 2
-        },
-        fall: {
-            imgsrc: './img/fighter/kenji/Fall.png',
-            framesMax: 2
-        },
-        attack1: {
-            imgsrc: './img/fighter/kenji/Attack1.png',
-            framesMax: 4,
-            framesAttackHit: 2
-        },
-        attack2: {
-            imgsrc: './img/fighter/kenji/Attack2.png',
-            framesMax: 4,
-            framesAttackHit: 2
-        },
-        takehit: {
-            imgsrc: './img/fighter/kenji/Take Hit.png',
-            framesMax: 3
-        },
-        death: {
-            imgsrc: './img/fighter/kenji/Death.png',
-            framesMax: 7
-        }
-    }
-});
+const player1 = CHAR_RYUMA;
+const player2 = CHAR_RONIN;
 
-// // Create sprites with initial states
+// Create sprites with initial states
 const stage = new Sprite({
     position: { x: 0, y: 0 },
     imgsrc: './img/stage/stage1.png'
@@ -152,74 +52,74 @@ function animate() {
     c.fillStyle = 'rgba(255, 255, 255, 0.12)';
     c.fillRect(0, 0, canvas.width, canvas.height);
 
-    player.update();
-    enemy.update();
-    player.velocity.x = 0;
-    enemy.velocity.x = 0;
+    player1.update();
+    player2.update();
+    player1.speed.x = 0;
+    player2.speed.x = 0;
 
-    // Player movement
-    if (key.a.pressed && player.lastKey === 'a' && player.position.x > 0) {
-        player.velocity.x = -5;
-        player.switchSprite('run');
+    // player1 movement
+    if (key.a.pressed && player1.lastKey === 'a' && player1.position.x > 0) {
+        player1.speed.x = -5;
+        player1.switchSprite('run');
     }
-    else if (key.d.pressed && player.lastKey === 'd' && (player.position.x + player.dimension.width) < canvas.width) {
-        player.velocity.x = 5;
-        player.switchSprite('run');
+    else if (key.d.pressed && player1.lastKey === 'd' && (player1.position.x + player1.dimension.width) < canvas.width) {
+        player1.speed.x = 5;
+        player1.switchSprite('run');
     } else
-        player.switchSprite('idle');
+        player1.switchSprite('idle');
 
-    // Player jump or fall
-    if (player.velocity.y < 0)
-        player.switchSprite('jump');
-    else if (player.velocity.y > 0)
-        player.switchSprite('fall')
+    // player1 jump or fall
+    if (player1.speed.y < 0)
+        player1.switchSprite('jump');
+    else if (player1.speed.y > 0)
+        player1.switchSprite('fall')
 
-    // Enemy movement
-    if (key.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft' && enemy.position.x > 0) {
-        enemy.velocity.x = -5;
-        enemy.switchSprite('run');
+    // player2 movement
+    if (key.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft' && player2.position.x > 0) {
+        player2.speed.x = -5;
+        player2.switchSprite('run');
     }
-    else if (key.ArrowRight.pressed && enemy.lastKey === 'ArrowRight' && (enemy.position.x + enemy.dimension.width) < canvas.width) {
-        enemy.velocity.x = 5;
-        enemy.switchSprite('run');
+    else if (key.ArrowRight.pressed && player2.lastKey === 'ArrowRight' && (player2.position.x + player2.dimension.width) < canvas.width) {
+        player2.speed.x = 5;
+        player2.switchSprite('run');
     } else
-        enemy.switchSprite('idle');
+        player2.switchSprite('idle');
 
-    // Enemy jump or fall
-    if (enemy.velocity.y < 0)
-        enemy.switchSprite('jump');
-    else if (enemy.velocity.y > 0)
-        enemy.switchSprite('fall')
+    // player2 jump or fall
+    if (player2.speed.y < 0)
+        player2.switchSprite('jump');
+    else if (player2.speed.y > 0)
+        player2.switchSprite('fall')
 
     // Detect collisions and gets hit
-    if (determineCollision({ rectangle1: player, rectangle2: enemy }) &&
-        player.framesCurrent === player.sprites.attack1.framesAttackHit &&
-        player.isAttacking) {
-        player.isAttacking = false;
-        enemy.takeHit(player.normalDamage);
-        gsap.to('#enemy-remaining-health', {
-            width: (enemy.remainingHealth / enemy.maxHealth) * 100 + '%'
+    if (determineCollision({ rectangle1: player1, rectangle2: player2 }) &&
+        player1.framesCurrent === player1.sprites.attack1.framesAttackHit &&
+        player1.isAttacking) {
+        player1.isAttacking = false;
+        player2.takeHit(player1.normalDamage);
+        gsap.to('#player2-remaining-health', {
+            width: (player2.remainingHealth / player2.maxHealth) * 100 + '%'
         });
     }
-    if (determineCollision({ rectangle1: enemy, rectangle2: player }) &&
-        enemy.framesCurrent === enemy.sprites.attack1.framesAttackHit &&
-        enemy.isAttacking) {
-        enemy.isAttacking = false;
-        player.takeHit(enemy.normalDamage);
-        gsap.to('#player-remaining-health', {
-            width:  (player.remainingHealth / player.maxHealth) * 100 + '%'
+    if (determineCollision({ rectangle1: player2, rectangle2: player1 }) &&
+        player2.framesCurrent === player2.sprites.attack1.framesAttackHit &&
+        player2.isAttacking) {
+        player2.isAttacking = false;
+        player1.takeHit(player2.normalDamage);
+        gsap.to('#player1-remaining-health', {
+            width: (player1.remainingHealth / player1.maxHealth) * 100 + '%'
         });
     }
 
     // Detect if misses
-    if (player.isAttacking && player.framesCurrent === player.sprites.attack1.framesAttackHit)
-        player.isAttacking = false;
-    if (enemy.isAttacking && enemy.framesCurrent === enemy.sprites.attack1.framesAttackHit)
-        enemy.isAttacking = false;
+    if (player1.isAttacking && player1.framesCurrent === player1.sprites.attack1.framesAttackHit)
+        player1.isAttacking = false;
+    if (player2.isAttacking && player2.framesCurrent === player2.sprites.attack1.framesAttackHit)
+        player2.isAttacking = false;
 
     //End game on health change
-    if (player.remainingHealth <= 0 || enemy.remainingHealth <= 0) {
-        determineWinner({ player, enemy, timer });
+    if (player1.remainingHealth <= 0 || player2.remainingHealth <= 0) {
+        determineWinner({ player1, player2, timer });
     }
 }
 
@@ -228,35 +128,35 @@ window.addEventListener('keydown', (event) => {
         switch (event.key) {
             case 'd':
                 key.d.pressed = true;
-                player.lastKey = 'd';
+                player1.lastKey = 'd';
                 break;
             case 'a':
                 key.a.pressed = true;
-                player.lastKey = 'a';
+                player1.lastKey = 'a';
                 break;
             case 'w':
-                if (player.position.y + player.dimension.height >= groundStage_Y)
-                    player.velocity.y = -15;
+                if (player1.position.y + player1.dimension.height >= groundStage_Y)
+                    player1.speed.y = -15;
                 break;
-            case ' ':
-                if (!player.isAttacking)
-                    player.attack();
+            case 's':
+                if (!player1.isAttacking)
+                    player1.attack();
                 break;
             case 'ArrowRight':
                 key.ArrowRight.pressed = true;
-                enemy.lastKey = 'ArrowRight';
+                player2.lastKey = 'ArrowRight';
                 break;
             case 'ArrowLeft':
                 key.ArrowLeft.pressed = true;
-                enemy.lastKey = 'ArrowLeft';
+                player2.lastKey = 'ArrowLeft';
                 break;
             case 'ArrowUp':
-                if (enemy.position.y + enemy.dimension.height >= canvas.height - 97)
-                    enemy.velocity.y = -15;
+                if (player2.position.y + player2.dimension.height >= canvas.height - 97)
+                    player2.speed.y = -15;
                 break;
             case 'ArrowDown':
-                if (!enemy.isAttacking)
-                    enemy.attack();
+                if (!player2.isAttacking)
+                    player2.attack();
                 break;
             default:
                 break;
