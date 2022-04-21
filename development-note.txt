@@ -1,0 +1,15 @@
+KNOWNS ISSUES:
+
+- Scenario 1:
+    - 1 attack can cause double damage
+    - 5 attack() called with 4 attacking animation only 
+- Reason:
+    - fighter.attack() function being called continuously when attack animation is not finished yet.
+- Solution:
+    - In fighter.attack(), set isAttacking to true only when animation is reset (framesCurrent = 0)
+
+TODO:
+
+Features:
+    - Add more fighter
+    - Try again button
