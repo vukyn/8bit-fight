@@ -42,18 +42,18 @@ class Fighter extends Sprite {
 
     update() {
         this.draw();
+        c.fillStyle = 'black';
+        
         if (!this.isDead) this.animateFrames();
 
         // Draw fighter
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
-        // c.fillStyle = 'black';
         // c.fillRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height);
 
         // Draw attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-        // c.fillStyle = 'black';
         // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
 
         // Gravity control
