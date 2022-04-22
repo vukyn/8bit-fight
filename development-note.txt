@@ -1,9 +1,9 @@
 HOW TO PLAY:
 - Control:
     Player 1:
-        - move (A,W,D)
-        - normal attack (G)
-        - heavy attack (H)
+        - move (a,w,d)
+        - normal attack (g)
+        - heavy attack (h)
     Player 2:
         - move (arrow Left, arrow Right, arrow Up)
         - normal attack (4)
@@ -21,12 +21,20 @@ KNOWNS ISSUES:
 
 - Scenario 2:
     - Sometimes health reduced to 0 but no death animation occurs.
+        - Step by step:
+            - Reduce health of player 1 to nearly 0 (almost dead).
+            - 2 players attack each other at the same time.
+            - Player 2 won, but player 1 still idle, didn't switch to death animation.
 - Reason:
 - Solution:
 
-- Scenario 2:
+- Scenario 3:
     - Rapidly presses attack button but the attack animation does not respond.
-    - When 2 players press attack at the same time usually happens
+    - When 2 players press attack at the same time usually happens.
+- Reason:
+- Solution:
+
+- Scenario 4:
 - Reason:
 - Solution:
 
@@ -34,8 +42,25 @@ TODO:
 
 Features:
     - Add more fighter
+    - Change fighter properties
+        - Ryuma
+        - Snape
     - Try again button
-    - Add heavy attack
+    - Add damage calculation (atk, def, crit% and crit dmg, piercing)
+    - Add damage number on screen
     - Add speical move(dash, double jump)
-    - Add special attack (double hit)
+    - Add special attack (combo hit)
     - Add range attack
+    - Add select fighter
+
+Done:
+    - Add more fighter
+        - Ryuma (Done)
+        - Ronin (Done)
+        - Tarzan (Done)
+        - Snape (Done)
+    - Change fighter properties
+        - Tarzan (Done)
+        - Ronin (Done)
+    - Add heavy attack (Done)
+    - Add heavy attack box (Done)

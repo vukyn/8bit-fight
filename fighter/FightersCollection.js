@@ -4,7 +4,8 @@ const CHAR_RYUMA = new Fighter({
     speed: { x: 0, y: 0 },
     offset: { x: 218, y: 194 },
     dimension: { width: 60, height: 110 },
-    attackBox: { offset: { x: 115, y: 0 }, width: 138, height: 65 },
+    normalAttackBox: { offset: { x: 115, y: 0 }, width: 138, height: 65 },
+    heavyAttackBox: { offset: { x: 115, y: 0 }, width: 138, height: 65 },
     imgsrc: './img/fighter/ryuma/Idle.png',
     scale: 2.5,
     framesMax: 8,
@@ -57,15 +58,16 @@ const CHAR_RONIN = new Fighter({
     speed: { x: 0, y: 0 },
     offset: { x: 215, y: 198 },
     dimension: { width: 52, height: 121 },
-    attackBox: { offset: { x: -174, y: 10 }, width: 130, height: 60 },
+    normalAttackBox: { offset: { x: -173, y: -15 }, width: 100, height: 105 },
+    heavyAttackBox: { offset: { x: -180, y: -50 }, width: 110, height: 150 },
     imgsrc: './img/fighter/ronin/Idle.png',
     scale: 2.5,
     framesMax: 4,
     framesHold: 7,
     maxHealth: 90,
-    remainingHealth: 90,
-    normalDamage: 10,
-    heavyDamage: 25,
+    remainingHealth: 95,
+    normalDamage: 15,
+    heavyDamage: 35,
     defense: 20,
     sprites: {
         idle: {
@@ -110,7 +112,8 @@ const CHAR_SNAPE = new Fighter({
     speed: { x: 0, y: 0 },
     offset: { x: 218, y: 174 },
     dimension: { width: 60, height: 130 },
-    attackBox: { offset: { x: 80, y: 20 }, width: 98, height: 60 },
+    normalAttackBox: { offset: { x: 80, y: 20 }, width: 98, height: 60 },
+    heavyAttackBox: { offset: { x: 80, y: 20 }, width: 98, height: 60 },
     imgsrc: './img/fighter/ryuma/Idle.png',
     scale: 3,
     framesMax: 8,
@@ -161,17 +164,18 @@ const CHAR_TARZAN = new Fighter({
     name: 'Tarzan',
     position: { x: 100, y: 150 },
     speed: { x: 0, y: 0 },
-    offset: { x: 160, y: 123 },
-    dimension: { width: 70, height: 110 },
-    attackBox: { offset: { x: 100, y: -20 }, width: 90, height: 75 },
+    offset: { x: 160, y: 108 },
+    dimension: { width: 70, height: 125 },
+    normalAttackBox: { offset: { x: 100, y: 45 }, width: 97, height: 50 },
+    heavyAttackBox: { offset: { x: 125, y: -65 }, width: 69, height: 150 },
     imgsrc: './img/fighter/tarzan/Idle.png',
     scale: 2.85,
     framesMax: 8,
     framesHold: 5,
-    maxHealth: 120,
+    maxHealth: 140,
     remainingHealth: 120,
-    normalDamage: 15,
-    heavyDamage: 30,
+    normalDamage: 10,
+    heavyDamage: 15,
     defense: 25,
     sprites: {
         idle: {
@@ -191,14 +195,14 @@ const CHAR_TARZAN = new Fighter({
             framesMax: 3
         },
         normalAttack: {
-            imgsrc: './img/fighter/tarzan/Attack1.png',
-            framesMax: 7,
-            framesAttackHit: 4
-        },
-        heavyAttack: {
             imgsrc: './img/fighter/tarzan/Attack3.png',
             framesMax: 9,
             framesAttackHit: 6
+        },
+        heavyAttack: {
+            imgsrc: './img/fighter/tarzan/Attack2.png',
+            framesMax: 6,
+            framesAttackHit: 3
         },
         takehit: {
             imgsrc: './img/fighter/tarzan/Take Hit.png',

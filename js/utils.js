@@ -1,10 +1,20 @@
-// Collision logic
-function determineCollision({ rectangle1, rectangle2 }) {
-    return (
-        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
-        rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.dimension.width &&
-        rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
-        rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.dimension.height);
+// Collision logic 
+function determineCollision({ fighter1, fighter2 }) {
+    // return true if fighter1 attacks fighter2 successfully
+    if (fighter1.isNormalAttacking) {
+        return (
+            fighter1.normalAttackBox.position.x + fighter1.normalAttackBox.width >= fighter2.position.x &&
+            fighter1.normalAttackBox.position.x <= fighter2.position.x + fighter2.dimension.width &&
+            fighter1.normalAttackBox.position.y + fighter1.normalAttackBox.height >= fighter2.position.y &&
+            fighter1.normalAttackBox.position.y <= fighter2.position.y + fighter2.dimension.height);
+    } else if (fighter1.isHeavyAttacking) {
+        return (
+            fighter1.heavyAttackBox.position.x + fighter1.heavyAttackBox.width >= fighter2.position.x &&
+            fighter1.heavyAttackBox.position.x <= fighter2.position.x + fighter2.dimension.width &&
+            fighter1.heavyAttackBox.position.y + fighter1.heavyAttackBox.height >= fighter2.position.y &&
+            fighter1.heavyAttackBox.position.y <= fighter2.position.y + fighter2.dimension.height);
+    } else
+        return false;
 }
 
 // Winner logic
@@ -35,7 +45,7 @@ function descreaseTimer() {
 
     //End game on time out
     if (time === 0) {
-        determineWinner({ player, enemy, timer });
+        determineWinner({ player1, player2, timer });
     }
 }
 

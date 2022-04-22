@@ -8,21 +8,31 @@ class Fighter extends Sprite {
         framesHold = 7,
         offset = { x: 0, y: 0 },
         dimension = { width: 50, height: 150 },
-        attackBox = { offset: { x: 0, y: 0 }, width: 0, height: 0 } }) {
+        normalAttackBox = { offset: { x: 0, y: 0 }, width: 0, height: 0 },
+        heavyAttackBox = { offset: { x: 0, y: 0 }, width: 0, height: 0 } }) {
         super({ position, imgsrc, scale, framesMax, framesHold, offset, dimension });
         this.name = name;
         this.speed = speed;
         this.lastKey;
         this.isNormalAttacking;
         this.isHeavyAttacking;
-        this.attackBox = {
+        this.normalAttackBox = {
             position: {
                 x: this.position.x,
                 y: this.position.y
             },
-            offset: attackBox.offset,
-            width: attackBox.width,
-            height: attackBox.height
+            offset: normalAttackBox.offset,
+            width: normalAttackBox.width,
+            height: normalAttackBox.height
+        }
+        this.heavyAttackBox = {
+            position: {
+                x: this.position.x,
+                y: this.position.y
+            },
+            offset: heavyAttackBox.offset,
+            width: heavyAttackBox.width,
+            height: heavyAttackBox.height
         }
         this.maxHealth = maxHealth;
         this.remainingHealth = remainingHealth;
@@ -42,19 +52,27 @@ class Fighter extends Sprite {
 
     update() {
         this.draw();
-        c.fillStyle = 'black';
-        
+        c.fillStyle = 'rgba(0,0,0,0.6)';
+
         if (!this.isDead) this.animateFrames();
 
         // Draw fighter
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
-        // c.fillRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height);
+        // if (this.name === 'Ronin')
+        //     c.fillRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height);
 
-        // Draw attack boxes
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-        this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-        // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+        // Draw normal attack boxes
+        this.normalAttackBox.position.x = this.position.x + this.normalAttackBox.offset.x;
+        this.normalAttackBox.position.y = this.position.y + this.normalAttackBox.offset.y;
+        // if (this.name === 'Tarzan')
+        //     c.fillRect(this.normalAttackBox.position.x, this.normalAttackBox.position.y, this.normalAttackBox.width, this.normalAttackBox.height);
+
+        // Draw heavy attack boxes
+        this.heavyAttackBox.position.x = this.position.x + this.heavyAttackBox.offset.x;
+        this.heavyAttackBox.position.y = this.position.y + this.heavyAttackBox.offset.y;
+        // if (this.name === 'Tarzan')
+        //     c.fillRect(this.heavyAttackBox.position.x, this.heavyAttackBox.position.y, this.heavyAttackBox.width, this.heavyAttackBox.height);
 
         // Gravity control
         const gravity = 0.7;
@@ -67,16 +85,14 @@ class Fighter extends Sprite {
 
     normalAttack() {
         this.switchSprite('normalAttack');
-        if (this.framesCurrent === 0) {
+        if (this.framesCurrent === 0)
             this.isNormalAttacking = true;
-        }
     }
 
     heavyAttack() {
         this.switchSprite('heavyAttack');
-        if (this.framesCurrent === 0) {
+        if (this.framesCurrent === 0)
             this.isHeavyAttacking = true;
-        }
     }
 
     takeHit(damage) {
