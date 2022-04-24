@@ -124,7 +124,10 @@ function animate() {
     if (player2.isNormalAttacking) {
         if (player2.framesCurrent === player2.sprites.normalAttack.framesAttackHit &&
             determineCollision({ fighter1: player2, fighter2: player1 })) {
+            console.log("Before hit: " + player1.health);
+            console.log("Damage: " + player2.normalDamage);
             player1.takeHit(player2.normalDamage);
+            console.log("Before hit: " + player1.health);
             player2.isNormalAttacking = false;
             gsap.to('#player1-remaining-health', {
                 width:
