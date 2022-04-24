@@ -23,7 +23,7 @@ function determineWinner({ player1, player2, timer }) {
     clearTimeout(timer);
     isOver = true;
     document.querySelector('#result').style.display = 'flex';
-    // document.querySelector('#retry').style.display = 'inline';
+    document.getElementById("retry").style.display = 'inline';
     if (player1.remainingHealth === player2.remainingHealth) {
         document.querySelector('#result').innerHTML = 'Tie';
     } else if (player1.remainingHealth > player2.remainingHealth) {
@@ -50,30 +50,31 @@ function descreaseTimer() {
 }
 
 // Reset timer and health
-function Retry() {
+var retry = document.getElementById("retry");
+retry.onclick = function () {
     isOver = false;
     time = gameTime;
     descreaseTimer();
 
-    // Player reset
-    player.remainingHealth = player.maxHealth;
-    player.switchSprite('idle');
-    player.position = { x: 100, y: 0 }
+    // Player1 reset
+    player1.remainingHealth = player1.maxHealth;
+    player1.switchSprite('idle');
+    player1.position = { x: 100, y: 0 }
     // player.image = player.sprites.idle.image;
     // player.framesMax = player.sprites.idle.framesMax
     // player.framesCurrent = 0;
 
 
-    // Enemy reset
-    enemy.remainingHealth = enemy.maxHealth;
-    enemy.switchSprite('idle');
-    enemy.position = { x: 880, y: 0 }
+    // Player2 reset
+    player1.remainingHealth = player1.maxHealth;
+    player2.switchSprite('idle');
+    player2.position = { x: 880, y: 0 }
     // enemy.image = enemy.sprites.idle.image;
     // enemy.framesMax = enemy.sprites.idle.framesMax
     // enemy.framesCurrent = 0;
 
-    document.querySelector('#player-remaining-health').style.width = '100%';
-    document.querySelector('#enemy-remaining-health').style.width = '100%';
+    document.querySelector('#player1-remaining-health').style.width = '100%';
+    document.querySelector('#player2-remaining-health').style.width = '100%';
     document.querySelector('#retry').style.display = 'none';
     document.querySelector('#result').style.display = 'none';
 }
